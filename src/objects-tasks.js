@@ -17,6 +17,7 @@
  *    shallowCopy({a: 2, b: { a: [1, 2, 3]}}) => {a: 2, b: { a: [1, 2, 3]}}
  *    shallowCopy({}) => {}
  */
+
 function shallowCopy(obj) {
   return { ...obj };
 }
@@ -162,18 +163,18 @@ function sellTickets(queue) {
 
   return queue.every((bill) => {
     if (bill === 25) {
-      count25 += count25;
+      count25 += 1;
       return true;
     }
     if (bill === 50 && count25 > 0) {
-      count25 -= count25;
-      count50 += count50;
+      count25 -= 1;
+      count50 += 1;
       return true;
     }
     if (bill === 100) {
       if (count50 > 0 && count25 > 0) {
-        count50 -= count50;
-        count25 -= count25;
+        count50 -= 1;
+        count25 -= 1;
         return true;
       }
       if (count25 >= 3) {
@@ -199,8 +200,13 @@ function sellTickets(queue) {
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+
+  this.getArea = () => {
+    return this.width * this.height;
+  };
 }
 
 /**
